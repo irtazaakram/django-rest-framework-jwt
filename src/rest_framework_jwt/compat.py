@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 from datetime import datetime
 import sys
 
-from django import VERSION
 import jwt
 
 from .settings import api_settings
@@ -37,7 +36,7 @@ except ImportError:
 
 
 def has_set_cookie_samesite():
-    return (VERSION >= (2,1,0))
+    return True
 
 
 def set_cookie_with_token(response, name, token):
