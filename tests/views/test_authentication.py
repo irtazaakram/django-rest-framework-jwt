@@ -22,7 +22,6 @@ from rest_framework import status
 
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework_jwt.compat import gettext_lazy as _
-from rest_framework_jwt.compat import has_set_cookie_samesite
 from rest_framework_jwt.settings import api_settings
 
 import re
@@ -208,8 +207,7 @@ def test_valid_credentials_with_auth_cookie_enabled_returns_jwt_and_cookie(
     assert setcookie['path'] == '/'
     assert setcookie['secure'] is True
     assert setcookie['httponly'] is True  # hardcoded
-    if has_set_cookie_samesite():
-        assert setcookie['samesite'] == 'Lax'
+    assert setcookie['samesite'] == 'Lax'
 
     assert response.status_code == status.HTTP_201_CREATED
     assert "token" in force_str(response.content)
@@ -237,8 +235,7 @@ def test_auth_cookie_settings(
     assert setcookie['path'] == '/pa/th'
     assert 'secure' not in setcookie.items()
     assert setcookie['httponly'] is True  # hardcoded
-    if has_set_cookie_samesite():
-        assert setcookie['samesite'] == 'Strict'
+    assert setcookie['samesite'] == 'Strict'
 
 
 def test_multi_keys_hash_hash(

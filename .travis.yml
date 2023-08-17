@@ -2,11 +2,10 @@ dist: xenial
 language: python
 cache: pip
 python:
-  - 2.7.13
-  - 3.5
-  - 3.6
-  - 3.7
   - 3.8
+  - 3.9
+  - 3.10
+  - 3.11
 install:
   - pip install tox-travis
 script:
@@ -14,14 +13,14 @@ script:
 jobs:
   include:
     - stage: test
-      python: '3.6'
+      python: '3.8'
       env: TOXENV=docs
     - stage: test
-      python: '3.7'
+      python: '3.8'
       env: TOXENV=manifest
     - stage: deploy
-      python: '2.7.13'
-      env: TOXENV=py27-dj111-drf37
+      python: '3.8'
+      env: TOXENV=py38-dj42-drf314
       deploy:
         provider: pypi
         user: styria
